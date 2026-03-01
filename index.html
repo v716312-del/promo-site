@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matreshka RP - Твой Бонус</title>
+    <style>
+        /* Стили iOS 26 "Liquid Glass" */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px; /* Отступы, чтобы контент не прилипал к краям */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            background-attachment: fixed; /* Фон не двигается при скролле */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Начинаем сверху, чтобы работал скролл */
+            color: white;
+            overflow-y: auto; /* Разрешаем прокрутку по вертикали */
+        }
+
+        /* Контейнер-стекло */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 45px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            max-width: 650px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Адаптивная картинка */
+        .hero-img {
+            width: 100%;
+            height: auto;
+            border-radius: 25px;
+            margin-bottom: 25px;
+            display: block; /* Убирает лишние отступы */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            font-size: clamp(24px, 5vw, 36px); /* Адаптивный размер шрифта */
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            background: linear-gradient(to bottom, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .description {
+            font-size: 17px;
+            line-height: 1.6;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 25px;
+            border-radius: 25px;
+            margin-bottom: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .promo-section {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+        }
+
+        .promo-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            display: block;
+            color: #d192ff;
+            font-weight: 700;
+        }
+
+        .promo-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            font-size: clamp(28px, 6vw, 42px);
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 20px;
+        }
+
+        .promo-box:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(209, 146, 255, 0.3);
+        }
+
+        .btn-copy {
+            background: #ffffff;
+            color: #000;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .btn-copy:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        /* Жидкие пятна на фоне */
+        .blob {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #6a11cb;
+            filter: blur(100px);
+            z-index: 1;
+            border-radius: 50%;
+            opacity: 0.3;
+            top: -100px;
+            left: -100px;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 200px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob"></div>
+    
+    <div class="glass-card">
+        <img src="https://i.ibb.co/XfXkY9V/1000010702.jpg" alt="Матрёшка РП" class="hero-img">
+        
+        <h1>Матрёшка РП</h1>
+        
+        <div class="description">
+            <strong>Матрёшка РП</strong> — это самый масштабный симулятор жизни в твоем телефоне. Окунись в атмосферу криминальной России или построй карьеру в госслужбах. Десятки серверов, сотни автомобилей и полная свобода действий ждут тебя!
+        </div>
+
+        <div class="promo-section">
+            <span class="promo-label">Твой секретный промокод:</span>
+            <div class="promo-box" id="promo" onclick="copyPromo()">G7ISHAOK</div>
+            <button class="btn-copy" onclick="copyPromo()">СКОПИРОВАТЬ</button>
+        </div>
+    </div>
+
+    <script>
+        function copyPromo() {
+            const promo = document.getElementById('promo').innerText;
+            navigator.clipboard.writeText(promo).then(() => {
+                alert('Промокод G7ISHAOK успешно скопирован! Приятной игры!');
+            });
+        }
+    </script>
+</body>
+</html>
